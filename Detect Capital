@@ -1,0 +1,41 @@
+#include <string>
+#include <iostream>
+using namespace std;
+
+class Solution {
+public:
+    bool detectCapitalUse(string word) {
+        
+        int len = strlen(word.c_str());
+        char temp;
+        bool isCap = false;
+        bool result = true;
+        
+        for(int i = 0; i < len/2; i++){
+            temp = word[i];
+            word[i] = word[len-i-1];
+            word[len-i-1] = temp;
+        }
+        
+        if(word[0] >= 65 && word[0] <= 90 ){
+            isCap = true;
+        }
+        
+        if(isCap == true){
+            for(int i = 1; i < len; i++){
+              if(word[i] < 65 || word[i] > 90 ){
+                  result = false;
+              }
+            }
+        }
+        else{
+            for(int i = 1; i < len-1; i++){
+              if(word[i] < 97 || word[i] > 122 ){
+                  result = false;
+              }
+            }
+        }
+        
+        return result;
+    }
+};
