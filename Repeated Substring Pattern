@@ -1,0 +1,24 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    bool repeatedSubstringPattern(string s) {
+        int len = strlen(s.c_str());
+        int k = 0, j = 0;
+        bool isRepeat = false;
+        for(k = 1; k <= len/2; k++){
+            for(j = 0; j+k <len; j++){
+                if(s[j] != s[j+k]){
+                    j = len;
+                }                
+            }
+            if(((j+k) == len) && (len%k==0)){
+                isRepeat = true;
+                break;
+            }
+        }
+        return isRepeat;
+    }
+};
