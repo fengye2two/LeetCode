@@ -1,0 +1,32 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    int countSegments(string s) {
+        int len = strlen(s.c_str());
+        int count = 0;
+        int temp = 0, i = 0, j = 1;
+        if(len == 0){
+            return 0;
+        }
+        for(; i<len; i++, j++){
+            if(s[i]==32){
+                if(s[i]==s[j]||j>=len){
+                    temp++;
+                }
+                count++;
+            }
+        }
+        if(count==temp && count == len){
+            return 0;
+        }
+        if(s[0]==32){
+            return count-temp;
+        }
+        else{
+            return count-temp+1;
+        }
+    }
+};
