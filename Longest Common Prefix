@@ -1,0 +1,36 @@
+#include <string>
+#include <iostream>
+using namespace std;
+
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        int len = strs.size();
+        if(len==0){
+            return "";
+        }
+        if(len==1){
+            return strs[0];
+        }
+        int index = 0, i=1;
+        bool isEqual = true;
+        string result;
+        while(isEqual){
+            for(; i<len; i++){
+                if(strs[0][index]!=strs[i][index]){
+                    isEqual = false;
+                    break;
+                }
+            }
+            if(isEqual){
+                index++;
+                i=1;
+            }
+        }
+        if(index==0){
+            return "";
+        }
+        result = strs[0].substr(0,index);
+        return result;
+    }
+};
