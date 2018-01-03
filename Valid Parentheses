@@ -1,0 +1,44 @@
+#include <iostream>
+#include <string>
+#include <stack>
+using namespace std;
+
+class Solution {
+public:
+    bool isValid(string s) {
+        bool validity=true;
+        stack<char> sss;
+        int len = s.size();
+        for(int i=0; i<len; i++){
+            if(s[i]=='(' || s[i]=='[' || s[i]=='{'){
+                sss.push(s[i]);
+            }            
+            else if(s[i]==')'){
+                if(sss.empty()||sss.top()!='('){
+                    validity=false;
+                    break;
+                }
+                sss.pop();
+            }
+            else if(s[i]==']'){
+                if(sss.empty()||sss.top()!='['){
+                    validity=false;
+                    break;
+                }
+                sss.pop();
+            }
+            else if(s[i]=='}'){
+                if(sss.empty()||sss.top()!='{'){
+                    validity=false;
+                    break;
+                }
+                sss.pop();
+            }
+            
+        }
+        if(!sss.empty()){
+            validity=false;
+        }
+        return validity;
+    }
+};
