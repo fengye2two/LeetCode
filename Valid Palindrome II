@@ -1,0 +1,88 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Solution {
+   
+public:
+    bool validPalindrome(string s) {
+        int len=s.size();
+        if(!(len>=0&&len<=50000)){
+            return false;
+        }
+        int left=0, right=len-1;
+        int tempLeft, tempRight, count=0;
+        bool isOK=true, isRetry=false;
+        while(left<right){
+            if(s[left]==s[right]){
+                left++;
+                right--;
+                continue;
+            }
+            else{
+                if(s[left+1]==s[right]){
+                    count++;
+                    if(count==1){
+                        tempLeft=left;
+                        tempRight=right;
+                    }
+                    if(count==2){
+                        isRetry=true;
+                        continue;
+                    }
+                    if(count>2){
+                        isOK=false;
+                        break;
+                    }
+                   
+                    left=left+2;
+                    right--;
+                    continue;
+                }
+                else if(s[left]==s[right-1]){
+                    count++;
+                    if(count==2){
+                        isRetry=true;
+                        continue;
+                    }
+                    if(count>2){
+                        isOK=false;
+                        break;
+                    }
+                    
+                    left++;
+                    right=right-2;
+                    continue;                    
+                }
+                else{
+                    count++;
+                    if(count==2){
+                        isRetry=true;
+                        continue;
+                    }
+                    if(!isRetry){
+                        isOK=false;
+                        break;
+                    }
+                }
+                
+                if(isRetry){
+                    left=tempLeft;
+                    right=tempRight;
+                    if(s[left]==s[right-1]){
+                        left++;
+                        right=right-2;
+                        count--;
+                        isRetry=false;
+                        continue; 
+                    }
+                    else{
+                        isOK=false;
+                        break;
+                    }
+                }
+            }
+        }        
+        return isOK;
+    }
+};
