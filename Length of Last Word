@@ -1,0 +1,35 @@
+#include <string>
+#include <iostream>
+using namespace std;
+
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        int len=s.length();
+        int countEndSpace=0;
+        int count=0;
+        if(!(len>0)){
+            return 0;
+        }
+        for(int i=len-1; i>=0; i--){
+            if(s[i]!=' '){
+                break;
+            }
+            else{
+                countEndSpace++; 
+            }
+        }
+        if(countEndSpace==len){
+            return 0;
+        }
+        for(int i=len-countEndSpace-1; i>=0; i--){
+            if(s[i]!=' '){
+                count++;
+            }
+            else{
+                break;
+            }
+        }
+        return count;
+    }
+};
