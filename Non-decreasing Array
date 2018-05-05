@@ -1,0 +1,40 @@
+class Solution {
+public:
+    bool checkPossibility(vector<int>& nums) {
+        bool isModified=false;
+        int temp;
+        int Tried=0;
+        bool isFirst=false;
+        
+        if(nums[0]>nums[1]){
+            nums[0]=nums[1]/2;
+            isModified=true;
+            isFirst=true;
+        }
+        
+        for(int i=1;i<nums.size()-1;i++){
+            if(nums[i]<=nums[i+1]){
+                continue;
+            }
+            else{
+                   if(isModified==true && (Tried>2 || isFirst==true)){
+                       return false;
+                   }
+                   else{
+                       isModified=true;
+                       if(Tried==0){
+                          temp=nums[i];
+                          nums[i]=nums[i-1];
+                          i--;
+                          Tried++;
+                       }
+                       else{
+                          nums[i]=nums[i+1]=temp;
+                          Tried++;
+                       }
+                   }
+            }
+        }
+        return true;
+    }
+};
