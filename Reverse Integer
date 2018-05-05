@@ -1,0 +1,27 @@
+#include <stack>
+class Solution {
+public:
+    int reverse(int x) {
+        int tempX=x, reversedX=0;
+        stack<int> s1;
+        while(tempX!=0){
+            int k=tempX%10;
+            s1.push(k);
+            reversedX=reversedX*10+k;
+            tempX=tempX/10;
+        }
+        
+        int tempReversedX=reversedX;
+        while(!s1.empty()){
+            int t1 = s1.top();
+            int t2=tempReversedX%10;
+            if(t1!=t2){
+                return 0;
+            }
+            s1.pop();
+            tempReversedX=tempReversedX/10;
+        }
+        
+        return reversedX;
+    }
+};
