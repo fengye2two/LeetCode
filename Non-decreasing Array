@@ -2,9 +2,10 @@ class Solution {
 public:
     bool checkPossibility(vector<int>& nums) {
         bool isModified=false;
-        int temp;
-        int Tried=0;
         bool isFirst=false;
+        int nTemp;
+        int nTry=0;
+        int site;
         
         if(nums[0]>nums[1]){
             nums[0]=nums[1]/2;
@@ -17,22 +18,27 @@ public:
                 continue;
             }
             else{
-                   if(isModified==true && (Tried>2 || isFirst==true)){
-                       return false;
-                   }
-                   else{
-                       isModified=true;
-                       if(Tried==0){
-                          temp=nums[i];
-                          nums[i]=nums[i-1];
-                          i--;
-                          Tried++;
-                       }
-                       else{
-                          nums[i]=nums[i+1]=temp;
-                          Tried++;
-                       }
-                   }
+                if(isModified==true && isFirst==true){
+                    return false;
+                }
+                else{
+                    isModified=true;
+                    if(nTry==0){
+                        nTemp=nums[i];
+                        nums[i]=nums[i-1];
+                        site=i;
+                        i--;
+                        nTry++;
+                    }
+                    else{
+                        if(nTry>2){
+                            return false;
+                        }
+                        i=site;
+                        nums[site]=nums[site+1]=nTemp;
+                        nTry++;
+                    }
+                }
             }
         }
         return true;
