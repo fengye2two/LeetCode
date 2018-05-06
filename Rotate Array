@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void reverse(vector<int>& nums, int start, int end){
+        for(int i=start, p=0;i<=(start+end)/2;i++,p++){
+            int k=nums[i];
+            nums[i]=nums[end-p];
+            nums[end-p]=k;
+        }
+
+        return;
+    }
+    void rotate(vector<int>& nums, int k) {
+        int length=nums.size();
+        if(k>length){
+
+            return;
+        }
+
+        reverse(nums,0,length-k-1);
+        reverse(nums,length-k,length-1);
+        reverse(nums,0,length-1);
+
+        return;
+    }
+};
