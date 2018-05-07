@@ -1,0 +1,72 @@
+#include <stack>
+#include <vector>
+class Solution {
+public:
+    int calc(long int n){
+        long int tempN,rN,rTempN;
+        stack<int> s;
+        tempN=n;
+        
+        while(tempN!=0){
+            int k=tempN%10;
+            s.push(k);
+            tempN=tempN/10;
+        }
+        
+        while(!s.empty()){
+            tempN=tempN*10+s.top();
+            s.pop();
+        }
+        
+        
+        if(tempN==n){
+            return n%1337;
+        }
+        else{
+            return 0;
+        }
+    }
+public:
+    int largestPalindrome(int n) {
+        int largest=0;
+        int smallest=1;
+        for(int i=0;i<n;i++){
+            largest=largest*10+9;
+            smallest=smallest*10;
+        }
+        smallest=smallest/10;
+        
+        long int test,tempTest,rTest,rTempTest;
+        bool isFind=false;
+        stack<int> s;
+        vector<long int> done;
+        
+        test=largest*largest;
+        tempTest=test;
+        while(tempTest!=0){
+            int k=tempTest%10;
+            s.push(k);
+            tempTest=tempTest/10;
+        }
+        
+        while(!s.empty()){
+            tempTest=tempTest*10+s.top();
+            s.pop();
+        }
+        
+        
+        if(tempTest==test){
+            return test%1337;
+        }
+        else{
+            return 0;
+        }
+        
+        done.push_back(test);
+        
+        for(long int i=largest-1;i>smallest;i--){
+            
+        }
+        
+    }
+};
