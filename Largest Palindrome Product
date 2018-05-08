@@ -1,31 +1,26 @@
-#include <queue>
-#include <vector>
+#include <String>
 class Solution {
 public:
-    bool calc(long int n){
-        long int tempN;
-        queue<int> s;
-        tempN=n;
-        
-        while(tempN!=0){
-            int k=tempN%10;
-            s.push(k);
-            tempN=tempN/10;
+    long int createNum(int n){
+        string s1Num=to_string(n);
+        int len=s1Num.length();
+        string s2Num;
+        for(int i=0;i<len;i++){
+            s2Num[i]=s1Num[i];
         }
         
-        while(!s.empty()){
-            tempN=tempN*10+s.front();
-            s.pop();
+        for(int i=0;i<=len/2;i++){
+            char t;
+            t=s2Num[i];
+            s2Num[i]=s2Num[len-i-1];
+            s2Num[len-i-1]=t;
         }
-        
-        
-        if(tempN==n){
-            return true;
-        }
-        else{
-            return false;
-        }
+        string sNum=s1Num+s2Num;
+        const char* chNum=sNum.c_str();
+        return atol(chNum);
     }
+    
+    
 public:
     int largestPalindrome(int n) {
         int largest=0;
@@ -36,57 +31,9 @@ public:
         }
         smallest=smallest/10;
         
-        long int test,s1,s2,s3;
-        bool isFind=false;
-        map<long int, int> done;
-        
-        test=largest*largest;
-        isFind=calc(test);
-        if(isFind==true){
-            cout<<"test1"<<endl;
-            return test%1337;
-        }
-        else{
-            done.insert(pair<long int, int>(test,0));
-        }
-        
-        for(long int i=largest-1;i>smallest;i--){
-            s1=i*(i+1);
-            s2=i*i;
-            s3=(i+1)*(i-1);
-            if(done.find(s1)==done.end()){
-                isFind=calc(s1);
-                if(isFind==true){
-                    cout<<"s1"<<endl;
-                    return s1%1337;
-                }
-                else{
-                    done.insert(pair<long int, int>(s1,0));
-                }
-            }
+        for(int i=largest;i>smallest;i--){
             
-            if(done.find(s2)==done.end()){
-                isFind=calc(s2);
-                if(isFind==true){
-                    cout<<"s2"<<endl;
-                    return s2%1337;
-                }
-                else{
-                    done.insert(pair<long int, int>(s2,0));
-                }
-            }
-            
-            if(done.find(s3)==done.end()){
-                isFind=calc(s3);
-                if(isFind==true){
-                    cout<<"s3"<<endl;
-                    return s3%1337;
-                }
-                else{
-                    done.insert(pair<long int, int>(s3,0));
-                }
-            }
         }
-        
+
     }
 };
