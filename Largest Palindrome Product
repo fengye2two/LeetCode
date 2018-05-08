@@ -2,8 +2,8 @@
 #include <vector>
 class Solution {
 public:
-    int calc(long int n){
-        long int tempN,rN,rTempN;
+    bool calc(long int n){
+        long int tempN;
         stack<int> s;
         tempN=n;
         
@@ -20,10 +20,10 @@ public:
         
         
         if(tempN==n){
-            return n%1337;
+            return true;
         }
         else{
-            return 0;
+            return false;
         }
     }
 public:
@@ -36,36 +36,52 @@ public:
         }
         smallest=smallest/10;
         
-        long int test,tempTest,rTest,rTempTest;
+        long int test,s1,s2,s3;
         bool isFind=false;
-        stack<int> s;
-        vector<long int> done;
+        map<long int, int> done;
         
         test=largest*largest;
-        tempTest=test;
-        while(tempTest!=0){
-            int k=tempTest%10;
-            s.push(k);
-            tempTest=tempTest/10;
-        }
-        
-        while(!s.empty()){
-            tempTest=tempTest*10+s.top();
-            s.pop();
-        }
-        
-        
-        if(tempTest==test){
+        isFind=calc(test);
+        if(isFind==true){
             return test%1337;
         }
         else{
-            return 0;
+            done.insert(pair<long int, int>(test,0));
         }
         
-        done.push_back(test);
-        
         for(long int i=largest-1;i>smallest;i--){
+            s1=i*(i+1);
+            s2=i*i;
+            s3=(i+1)*(i-1);
+            if(done.find(s1)==done.end()){
+                isFind=calc(s1);
+                if(isFind==true){
+                    return i%1337;
+                }
+                else{
+                    done.insert(pair<long int, int>(s1,0));
+                }
+            }
             
+            if(done.find(s2)==done.end()){
+                isFind=calc(s2);
+                if(isFind==true){
+                    return i%1337;
+                }
+                else{
+                    done.insert(pair<long int, int>(s2,0));
+                }
+            }
+            
+            if(done.find(s3)==done.end()){
+                isFind=calc(s3);
+                if(isFind==true){
+                    return i%1337;
+                }
+                else{
+                    done.insert(pair<long int, int>(s3,0));
+                }
+            }
         }
         
     }
