@@ -1,10 +1,10 @@
-#include <stack>
+#include <queue>
 #include <vector>
 class Solution {
 public:
     bool calc(long int n){
         long int tempN;
-        stack<int> s;
+        queue<int> s;
         tempN=n;
         
         while(tempN!=0){
@@ -14,7 +14,7 @@ public:
         }
         
         while(!s.empty()){
-            tempN=tempN*10+s.top();
+            tempN=tempN*10+s.front();
             s.pop();
         }
         
@@ -43,6 +43,7 @@ public:
         test=largest*largest;
         isFind=calc(test);
         if(isFind==true){
+            cout<<"test1"<<endl;
             return test%1337;
         }
         else{
@@ -56,7 +57,8 @@ public:
             if(done.find(s1)==done.end()){
                 isFind=calc(s1);
                 if(isFind==true){
-                    return i%1337;
+                    cout<<"s1"<<endl;
+                    return s1%1337;
                 }
                 else{
                     done.insert(pair<long int, int>(s1,0));
@@ -66,7 +68,8 @@ public:
             if(done.find(s2)==done.end()){
                 isFind=calc(s2);
                 if(isFind==true){
-                    return i%1337;
+                    cout<<"s2"<<endl;
+                    return s2%1337;
                 }
                 else{
                     done.insert(pair<long int, int>(s2,0));
@@ -76,7 +79,8 @@ public:
             if(done.find(s3)==done.end()){
                 isFind=calc(s3);
                 if(isFind==true){
-                    return i%1337;
+                    cout<<"s3"<<endl;
+                    return s3%1337;
                 }
                 else{
                     done.insert(pair<long int, int>(s3,0));
