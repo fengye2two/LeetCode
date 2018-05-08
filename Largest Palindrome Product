@@ -5,16 +5,10 @@ public:
         string s1Num=to_string(n);
         int len=s1Num.length();
         string s2Num;
-        for(int i=0;i<len;i++){
-            s2Num[i]=s1Num[i];
+        for(int i=len-1;i>=0;i--){
+            s2Num+=s1Num[i];
         }
-        
-        for(int i=0;i<=len/2;i++){
-            char t;
-            t=s2Num[i];
-            s2Num[i]=s2Num[len-i-1];
-            s2Num[len-i-1]=t;
-        }
+
         string sNum=s1Num+s2Num;
         const char* chNum=sNum.c_str();
         return atol(chNum);
@@ -23,6 +17,10 @@ public:
     
 public:
     int largestPalindrome(int n) {
+        if(n==1){
+            return 9;
+        }
+        
         int largest=0;
         int smallest=1;
         for(int i=0;i<n;i++){
@@ -32,7 +30,15 @@ public:
         smallest=smallest/10;
         
         for(int i=largest;i>smallest;i--){
-            
+            long int palindrome=createNum(i);
+            for(int j=largest;j>smallest;j--){
+                if(palindrome/j>largest){
+                    break;
+                }
+                if(palindrome%j==0){
+                    return palindrome%1337;
+                }
+            }
         }
 
     }
