@@ -6,12 +6,6 @@ public:
         stack<char> s;
         char ch;
         while(n!=0){
-            if(n==26){
-                ch='Z';
-                s.push(ch);
-                break;
-            }
-            
             ch=(n-1)%26+'A';
             s.push(ch);
             n=(n-1)/26;
