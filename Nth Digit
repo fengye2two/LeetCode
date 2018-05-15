@@ -1,0 +1,21 @@
+#include <math>
+#include <string>
+class Solution {
+public:
+    int findNthDigit(int n) {
+        long int cnt=9,unit=1,start=1;
+        
+        while(n>cnt * unit){
+            n=n-cnt * unit;
+            unit++;
+            cnt=cnt*10;
+            start=start*10;
+        }
+        
+        start=start+(n-1)/unit;
+        string s=to_string(start);
+
+        char ch=s[(n-1)%unit];
+        return atoi(&ch);
+    }
+};
