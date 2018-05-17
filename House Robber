@@ -1,0 +1,35 @@
+#include <vector>
+using namespace std;
+
+class Solution {
+    vector<int> maxRob;
+public:
+    int rob(vector<int>& nums) {
+        int len=nums.size();
+        maxRob.resize(len,-1);
+        
+        int m1=reRob(nums,len-1);
+        int m2=reRob(nums,len-2);
+        
+        return max(m1,m2);
+
+    }
+    
+    int reRob(vector<int> nums, int pos){
+        if(pos<0){
+            return 0;
+        }
+        
+        if(maxRob[pos]!=-1){
+            return maxRob[pos];
+        }
+        
+        int m1=reRob(nums,pos-2);
+        int m2=reRob(nums,pos-3);
+        
+        int m=max(m1,m2)+nums[pos];
+        maxRob[pos]=m;
+        
+        return m;
+    }
+};
