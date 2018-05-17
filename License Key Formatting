@@ -1,0 +1,44 @@
+#include <stack>
+class Solution {
+public:
+    string licenseKeyFormatting(string S, int K) {
+        int lenS=S.length(),lenT,lenR,indexT=0,indexR=0,m=0;
+        string result="";
+        stack<char> s;
+        
+        if(lenS==0){
+            return "";
+        }
+        
+        for(int i=lenS-1;i>=0;i--){
+            if(S[i]=='-'){
+                continue;
+            }
+            if(S[i]>='a' && S[i]<='z'){
+                S[i]=S[i]+'A'-'a';
+            }
+            s.push(S[i]);
+            m++;
+            if(m==K){
+                s.push('-');
+                m=0;
+            }
+        }
+        
+        if(s.empty()){
+            return "";
+        }
+        
+        if(s.top()=='-'){
+            s.pop();
+        }
+
+        while(!s.empty()){
+            char ch=s.top();
+            result+=ch;
+            s.pop();
+        }
+        
+        return result;
+    }
+};
