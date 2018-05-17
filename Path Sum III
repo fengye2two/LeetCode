@@ -1,0 +1,52 @@
+#include <queue>
+#include <iostream>
+using namespace std;
+
+class Solution {
+    int count=0;
+public:
+    int pathSum(TreeNode* root, int sum) {
+        if(!root){
+            return 0;
+        }
+        
+        queue<TreeNode*> Q;
+        Q.push(root);
+        
+        while(!Q.empty()){
+            TreeNode* p=Q.front();
+            Q.pop();
+            if(p->left){
+                Q.push(p->left);
+            }
+            if(p->right){
+                Q.push(p->right);
+            }
+            
+            int curVal=0;
+            reSum(p,sum,curVal);
+        }
+        
+        return count;
+    }
+    
+    void reSum(TreeNode* node, int sum, int curVal){
+        int m=node->val;
+        if(sum==(curVal+m)){
+            count++;
+        }
+        
+        if(!(node->left) && !(node->right)){
+            return;
+        }
+        
+        if(node->left){
+            reSum(node->left,sum,curVal+m);
+        }
+        if(node->right){
+            reSum(node->right,sum,curVal+m);
+        }
+        
+        return;
+    }
+};
