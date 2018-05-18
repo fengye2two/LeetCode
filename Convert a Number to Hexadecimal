@@ -1,0 +1,40 @@
+class Solution {
+public:
+    string toHex(int num) {
+        string hexString = "";
+        string hexChar = "0123456789abcdef";
+
+        while (num) {
+            hexString = hexChar[num & 0xF] + hexString;
+            num = (unsigned)num >> 4;
+        }
+
+        return hexString.empty() ? "0" : hexString;
+    }
+};
+
+class Solution {
+public:
+    string toHex(int num) {
+        if(num==0){
+            return "0";
+        }
+        
+        int k;
+        char ch;
+        string result;
+        
+        while(num){
+            k=(unsigned)num%16;
+            if(k>=0 && k<=9){
+                ch=k+'0';
+            }
+            else{
+                ch=k-10+'a';
+            }
+            result=ch+result;
+            num=(unsigned)num/16;
+        }
+        return result;
+    }
+};
