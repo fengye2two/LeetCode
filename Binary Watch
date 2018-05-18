@@ -1,0 +1,45 @@
+#include <vector>
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    vector<string> readBinaryWatch(int num) {
+        vector<string> result;
+        result.clear();
+        if(num<0 || num>10){
+            return result;
+        }
+        
+        for(int h=0;h<12;h++){
+            for(int m=0;m<60;m++){
+                int hc=bitCount(h);
+                int mc=bitCount(m);
+                if(hc+mc==num){
+                    string time=to_string(h)+":";
+                    if(m<10){
+                        time+="0";
+                    }
+                    time+=to_string(m);
+                    result.push_back(time);
+                }
+            }
+        }
+        
+        return result;
+    }
+    
+    int bitCount(int num){
+        int count=0;
+        while((unsigned)num){
+            int k=(unsigned)num & 1;
+            if(k==1){
+                count++;
+            }
+            
+            num=(unsigned)num>>1;
+        }
+        
+        return count;
+    }
+};
