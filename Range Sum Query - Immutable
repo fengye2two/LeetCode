@@ -1,0 +1,23 @@
+class NumArray {
+public:
+    vector<int> accm;
+    NumArray(vector<int> nums) {
+        accm=nums;
+        int len=nums.size();
+        
+        for(int i=1;i<len;i++){
+            accm[i]=accm[i]+accm[i-1];
+        }
+    }
+    
+    int sumRange(int i, int j) {
+        int result;
+        if(i==0){
+            result=accm[j];
+        }
+        else{
+            result=accm[j]-accm[i-1];
+        }
+        return result;
+    }
+};
