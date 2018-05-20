@@ -1,0 +1,30 @@
+#include <vector>
+#include <iostream>
+#include <map>
+using namespace std;
+
+class Solution {
+public:
+    int numberOfBoomerangs(vector<pair<int, int>>& points) {
+        int count=0,len=points.size();
+        map<double, int> statistics;
+        
+        for(int i=0;i<len;i++){
+            statistics.clear();
+            
+            for(int j=0;j<len;j++){
+                double x=points[i].first-points[j].first;
+                double y=points[i].second-points[j].second;   
+                statistics[x*x+y*y]++;
+            }
+            
+            map<double, int>::iterator it;
+            for(it=statistics.begin();it!=statistics.end();it++){
+                int temp=it->second;
+                count+=temp*(temp-1);
+            }
+        }
+
+        return count;
+    }
+};
