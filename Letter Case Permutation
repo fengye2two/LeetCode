@@ -1,0 +1,49 @@
+#include <vector>
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Solution {
+    vector<string> result;
+public:
+    vector<string> letterCasePermutation(string S) {
+        result.clear();
+        permutation(S,0);
+        return result;
+    }
+    
+    void permutation(string& S, int index){
+        if(index>=S.length() && !isExist(result,S)){
+            result.push_back(S);
+            return;
+        }
+        
+        if(S[index]>='0' && S[index]<='9'){
+            permutation(S, index+1);
+        }
+        else{
+            string s1(S);
+            string s2(S);
+            
+            if(s1[index]>='a' && s1[index]<='z'){
+                s1[index]-=('z'-'Z');
+            }
+            else if(s1[index]>='A' && s1[index]<='Z'){
+                s1[index]+=('z'-'Z');
+            }
+            permutation(s1, index+1);
+            permutation(s2, index+1);
+        }
+        return;
+    }
+    
+    bool isExist(vector<string> result, string s){
+        vector<string>::iterator it;
+        for(it=result.begin();it!=result.end();it++){
+            if(s.compare(*it)==0){
+                return true;
+            }
+        }
+        return false;
+    }
+};
