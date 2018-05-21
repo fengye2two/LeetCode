@@ -1,0 +1,48 @@
+#include <map>
+#include <iterator>
+#include <iostream>
+using namespace std;
+
+class Solution {
+public:
+    int findLHS(vector<int>& nums) {
+        int len=nums.size();
+        if(len==0){
+            return 0;
+        }
+        
+        map<int,int> calc;
+        calc.clear();
+        
+        for(int i=0;i<len;i++){
+            calc[nums[i]]++;
+        }
+        
+        map<int,int>::iterator it;
+        int count,maxCount=0;
+        for(it=calc.begin();it!=calc.end();it++){
+            count=0;
+            //if(isExist(calc,it->first+1)){
+            if(calc.count(it->first+1)){
+                count=calc[it->first]+calc[it->first+1];
+            }
+            
+            if(count>maxCount){
+                maxCount=count;
+            }
+        }
+        
+        return maxCount;
+    }
+    
+    bool isExist(map<int,int> calc, int num){
+        map<int,int>::iterator it;
+        for(it=calc.begin();it!=calc.end();it++){
+            if(it->first==num){
+                return true;
+                break;
+            }
+        }
+        return false;
+    }
+};
