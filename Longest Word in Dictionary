@@ -1,0 +1,27 @@
+#include <vector>
+#include <iostream>
+using namespace std;
+
+class Solution {
+public:
+    string longestWord(vector<string>& words) {
+        sort(words.begin(),words.end());
+        vector<string> process;
+        int maxLength=0;
+        string result;
+        
+        for(int i=0;i<words.size();i++){
+            int len=words[i].length();
+            if(len==1 || count(process.begin(),process.end(),words[i].substr(0,len-1))){
+                process.push_back(words[i]);
+                
+                if(len>maxLength){
+                    result=words[i];
+                    maxLength=len;
+                }
+            }
+        }
+        
+        return result;
+    }
+};
