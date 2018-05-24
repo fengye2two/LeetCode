@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        vector<int> result;
+        result.clear();
+        
+        int lenS=s.length(),lenP=p.length();
+        if(lenS==0 || lenP==0 || lenP>lenS){
+            return result;
+        }
+        
+        vector<int> mark(26,0);
+        for(int i=0;i<lenP;i++){
+            mark[p[i]-'a']++;
+        }
+        
+        int left=0,right=0;
+        int count=lenP;
+        
+        while(right<lenS){
+            if(mark[s[right++]-'a']-->=1){
+                count--;
+            }
+            
+            if(count==0){
+                result.push_back(left);
+            }
+            
+            if(right-left==lenP && mark[s[left++]-'a']++>=0){
+                count++;
+            }
+        }
+
+        return result;
+    }
+};
