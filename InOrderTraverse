@@ -19,3 +19,21 @@
             p=p->right;
         }
     }
+    
+    
+        TreeNode *p=root;
+        stack<TreeNode*> s;
+        vector<int> values;
+        
+        while(p || !s.empty()){
+            if(p){
+                s.push(p);
+                p=p->left;
+            }
+            else{
+                p=s.top();
+                s.pop();
+                values.push_back(p->val);
+                p=p->right;
+            }
+        }
