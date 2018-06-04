@@ -1,0 +1,56 @@
+class Solution {
+public:
+    static bool sshorter(const string &s1, const string &s2){
+        int lenS1=s1.size(),lenS2=s2.size();
+        if(lenS1==lenS2){
+            return s1<s2;
+        }
+        else{
+            return s1.size()>s2.size();
+        }
+    }
+    
+    bool isOK(const string &s, const string &t){
+        int lenS=s.size(),lenT=t.size();
+        if(lenS<lenT){
+            return false;
+        }
+        int i=0,j=0;
+        while(i<lenS && j<lenT){
+            if(s[i]==t[j]){
+                ++i;
+                ++j;
+            }
+            else{
+                ++i;
+            }
+        }
+        
+        if(j==lenT){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    string findLongestWord(string s, vector<string>& d) {
+
+        string result;
+        if(d.size()==0){
+            return result;
+        }
+        sort(d.begin(),d.end(),sshorter);
+        vector<string>::iterator it=d.begin();
+
+        while(it!=d.end()){
+            if(isOK(s,(*it))){
+                result=(*it);
+                break;
+            }
+            
+            ++it;
+        }
+        return result;
+    }
+};
