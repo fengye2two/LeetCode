@@ -118,11 +118,13 @@ public:
         pa=pb=0;
         while(pa<lenA && pb<lenB){
             if(pb==0 || A[pa]==B[pb]){
-                pa++;
-                pb++;
+                if(A[pa]==B[pb]){
+                    ++pb; 
+                }
+                ++pa;
             }
             else{
-                pb=next[pb-1];
+                pb=next[pb]-1;
             }
         }
         
